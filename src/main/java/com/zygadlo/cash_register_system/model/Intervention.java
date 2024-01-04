@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 public class Intervention {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;
@@ -27,7 +27,11 @@ public class Intervention {
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime dateOfIntervention;
 
+    @ManyToOne
+    @JoinColumn(name = "device_id")
     private Device device;
 
+    @ManyToOne
+    @JoinColumn(name = "serviceman_id")
     private Serviceman serviceman;
 }

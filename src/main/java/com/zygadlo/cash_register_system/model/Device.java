@@ -1,6 +1,7 @@
 package com.zygadlo.cash_register_system.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,7 +19,7 @@ import java.util.List;
 public class Device {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String manufacturer;
@@ -32,10 +33,16 @@ public class Device {
     private String methodOfUse;
     private String comments;
 
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "device",orphanRemoval = true)
     private List<Intervention> interventions;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "currentServiceMan_id")
+    @JsonIgnore
     private Serviceman currentServiceman;
 
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "installationPlace_id")
+    @JsonIgnore
     private InstallationPlace installationPlace;
 }

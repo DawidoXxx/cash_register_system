@@ -17,12 +17,13 @@ import java.util.List;
 public class TaxOffice {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String usCode;
     private String name;
     private String officeHead;
 
+    @OneToMany(mappedBy = "taxOffice")
     private List<TaxPayer> taxPayers;
 }

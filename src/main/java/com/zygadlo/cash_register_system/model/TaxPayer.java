@@ -17,7 +17,7 @@ import java.util.List;
 public class TaxPayer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;
@@ -27,8 +27,11 @@ public class TaxPayer {
     @Embedded
     private Address address;
 
+    @ManyToOne
+    @JoinColumn(name = "taxOffice_id")
     private TaxOffice taxOffice;
 
+    @OneToMany(mappedBy = "taxPayer",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<InstallationPlace> installationPlaces;
 
     public TaxPayer(String name, String companyName, String comments, Address address) {
